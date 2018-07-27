@@ -2,37 +2,39 @@ package com.infraredcontrol.abrsmarttech
 
 import android.hardware.ConsumerIrManager
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import android.content.Context
+import android.os.*
 import android.support.v7.app.AlertDialog
+import android.util.SparseArray
+
+
 
 
 class Dashboard : AppCompatActivity() {
 
 
-    val frequency = 2000
-    val pattern: IntArray = intArrayOf(714)
+    private val irData: SparseArray<String>? = null
+    private val pattern = intArrayOf(1901, 4453, 625, 1614, 625, 1588, 625, 1614, 625, 442, 625, 442, 625, 468, 625, 442, 625, 494, 572, 1614, 625, 1588, 625, 1614, 625, 494, 572, 442, 651, 442, 625, 442, 625, 442, 625, 1614, 625, 1588, 651, 1588, 625, 442, 625, 494, 598, 442, 625, 442, 625, 520, 572, 442,
+            625, 442, 625, 442, 651, 1588, 625, 1614, 625, 1588, 625, 1614, 625, 1588, 625, 48958)
+//    val frequency = 2000
+   // val pattern: IntArray = intArrayOf(714)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         val IR = getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
         bulb1.setOnClickListener {
-            println("bulb1 clicked"  )
-            println(pattern )
             bulb1.setImageResource(R.mipmap.on2)
             signal.visibility = View.VISIBLE
             Handler().postDelayed({
                 signal.visibility = View.INVISIBLE
             }, 10)
-
             Handler().postDelayed({
                 bulb1.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,159482)
+            CheckInfraredonDevice(IR,5800)
 
         }
         bulb2.setOnClickListener {
@@ -44,7 +46,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb2.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1443664253)
+            CheckInfraredonDevice(IR,5800)
         }
         bulb3.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -55,7 +57,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb3.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1248739308)
+            CheckInfraredonDevice(IR,5800)
         }
         bulb4.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -66,7 +68,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb4.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1400839614)
+            CheckInfraredonDevice(IR,3900)
         }
 
 
@@ -80,7 +82,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb5.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1519836740)
+            CheckInfraredonDevice(IR,4900)
         }
         bulb6.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -113,14 +115,14 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb8.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1798065458)
+            CheckInfraredonDevice(IR,3800)
         }
         shutdown.setOnClickListener {
             signal.visibility = View.VISIBLE
             Handler().postDelayed({
                 signal.visibility = View.INVISIBLE
             }, 10)
-            CheckInfraredonDevice(IR,1508956117)
+            CheckInfraredonDevice(IR,5800)
 
         }
 
@@ -135,9 +137,18 @@ class Dashboard : AppCompatActivity() {
 
     }
     fun CheckInfraredonDevice(IR:ConsumerIrManager,freq:Int) {
+         val pattern1 = intArrayOf(1901, 4453, 625, 1614, 625, 1588, 625, 1614, 625, 442, 625, 442, 625, 468, 625, 442, 625, 494, 572, 1614, 625, 1588, 625, 1614, 625, 494, 572, 442, 651, 442, 625, 442, 625, 442, 625, 1614, 625, 1588, 651, 1588, 625, 442, 625, 494, 598, 442, 625, 442, 625, 520, 572, 442,
+                625, 442, 625, 442, 651, 1588, 625, 1614, 625, 1588, 625, 1614, 625, 1588, 625, 48958)
+        val vb = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if(vb.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= 26) {
+                vb.vibrate(VibrationEffect.createOneShot(100, 10))
+            }
+            else {
+                vb.vibrate(10);
+            }
+        }
         if (!IR.hasIrEmitter()) {
-            println(freq)
-            println(pattern)
         val builder = AlertDialog.Builder(this)
         builder.setTitle("ARB Infrared")
         builder.setMessage("No Infrared found on this device..!!")
@@ -146,7 +157,7 @@ class Dashboard : AppCompatActivity() {
         dialog.show()
     }
         else {
-            IR.transmit(freq, pattern)
+            IR.transmit(38000, pattern1)
 
         }
 
