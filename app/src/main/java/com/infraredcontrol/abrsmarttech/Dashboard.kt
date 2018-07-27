@@ -34,7 +34,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb1.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,5800)
+            CheckInfraredonDevice(IR,38000)
 
         }
         bulb2.setOnClickListener {
@@ -46,7 +46,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb2.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,5800)
+            CheckInfraredonDevice(IR,39000)
         }
         bulb3.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -57,7 +57,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb3.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,5800)
+            CheckInfraredonDevice(IR,40000)
         }
         bulb4.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -68,7 +68,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb4.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,3900)
+            CheckInfraredonDevice(IR,41000)
         }
 
 
@@ -82,7 +82,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb5.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,4900)
+            CheckInfraredonDevice(IR,38000)
         }
         bulb6.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -93,7 +93,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb6.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1304526529)
+            CheckInfraredonDevice(IR,38000)
         }
         bulb7.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -104,7 +104,7 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb7.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,1550403580)
+            CheckInfraredonDevice(IR,38000)
         }
         bulb8.setOnClickListener {
             signal.visibility = View.VISIBLE
@@ -115,14 +115,39 @@ class Dashboard : AppCompatActivity() {
             Handler().postDelayed({
                 bulb8.setImageResource(R.mipmap.off2)
             }, 500)
-            CheckInfraredonDevice(IR,3800)
+            CheckInfraredonDevice(IR,38000)
         }
+
+        fanoff.setOnClickListener {
+            signal.visibility = View.VISIBLE
+            Handler().postDelayed({
+                signal.visibility = View.INVISIBLE
+            }, 10)
+            CheckInfraredonDevice(IR,38000)
+        }
+
+        minus.setOnClickListener {
+            signal.visibility = View.VISIBLE
+            Handler().postDelayed({
+                signal.visibility = View.INVISIBLE
+            }, 10)
+            CheckInfraredonDevice(IR,38000)
+        }
+
+        plus.setOnClickListener{
+            signal.visibility = View.VISIBLE
+            Handler().postDelayed({
+                signal.visibility = View.INVISIBLE
+            }, 10)
+            CheckInfraredonDevice(IR,38000)
+        }
+
         shutdown.setOnClickListener {
             signal.visibility = View.VISIBLE
             Handler().postDelayed({
                 signal.visibility = View.INVISIBLE
             }, 10)
-            CheckInfraredonDevice(IR,5800)
+            CheckInfraredonDevice(IR,60000)
 
         }
 
@@ -142,10 +167,10 @@ class Dashboard : AppCompatActivity() {
         val vb = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if(vb.hasVibrator()) {
             if (Build.VERSION.SDK_INT >= 26) {
-                vb.vibrate(VibrationEffect.createOneShot(100, 10))
+                vb.vibrate(VibrationEffect.createOneShot(100, 70))
             }
             else {
-                vb.vibrate(10);
+                vb.vibrate(70);
             }
         }
         if (!IR.hasIrEmitter()) {
@@ -157,7 +182,7 @@ class Dashboard : AppCompatActivity() {
         dialog.show()
     }
         else {
-            IR.transmit(38000, pattern1)
+            IR.transmit(freq, pattern1)
 
         }
 
