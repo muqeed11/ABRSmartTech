@@ -170,9 +170,9 @@
         android:id="@+id/fanoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="36dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:srcCompat="@mipmap/fan" />
 
@@ -191,9 +191,9 @@
         android:id="@+id/plus"
         android:layout_width="70dp"
         android:layout_height="62dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@+id/fanoff"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:srcCompat="@mipmap/plus_100" />
 
@@ -203,6 +203,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.579795" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.49878347" />
 
 
 </android.support.constraint.ConstraintLayout>
